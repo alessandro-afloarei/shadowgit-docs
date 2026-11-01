@@ -13,4 +13,4 @@ npx mint broken-links   # check internal links
 
 ## Phrases
 
-Every phrase the docs suggest asking is tested by the MCP server's eval, `scripts/eval-docs-phrases.ts` in [shadowgit-mcp](https://github.com/aflsolutions/shadowgit-mcp). When you add or change a phrase here, change it there too and run `npm run eval`.
+Every phrase the docs suggest asking is tested by the MCP server's eval, `scripts/eval-docs-phrases.ts` in [shadowgit-mcp](https://github.com/alessandro-afloarei/shadowgit-mcp). When you add or change a phrase here, change it there too and run `npm run eval`.
