@@ -5,7 +5,7 @@ description: "Connect ShadowGit to Claude Code, Cursor or Claude Desktop in 2 mi
 
 ## Before you start
 
-1. **The ShadowGit app**, running and tracking at least one project ([Download ShadowGit](https://shadowgit.com)). Checkpoints need version 0.3.4 or later, the Lens 0.3.6 or later, the map 0.3.10 or later, and docs 0.3.14 or later. Versions before 0.3.3 can't update themselves: [download the latest](https://shadowgit.com) once. To track a project, click **Add repository** in the app and pick its folder.
+1. **The ShadowGit app**, running and tracking at least one project ([Download ShadowGit](https://shadowgit.com)). Checkpoints need version 0.3.4 or later, the Lens 0.3.6 or later, the map 0.3.10 or later, docs 0.3.14 or later, and review comments 0.4.0 or later. Versions before 0.3.3 can't update themselves: [download the latest](https://shadowgit.com) once. To track a project, click **Add repository** in the app and pick its folder.
 2. **Node.js 20 or later** ([Download Node.js](https://nodejs.org)). Check with `node --version`.
 3. **Git** ([Download Git](https://git-scm.com/downloads)). Check with `git --version`.
 
@@ -176,6 +176,18 @@ Your assistant writes every page that has no words yet, five at a time, from the
 
 This needs the ShadowGit app running, in version 0.3.14 or later, and version 2.6.0 or later of the MCP server.
 
+### Your review comments {#comments}
+
+When you've sent [comments](/comments) from ShadowGit's **Changes** or Lens, ask:
+
+```text
+Address my ShadowGit review comments
+```
+
+Your assistant reads the comments you sent and haven't closed, changes only what each one asks, and replies to each. For anything else, it asks you first. Only you close a comment, in ShadowGit.
+
+This needs the ShadowGit app running, in version 0.4.0 or later, and version 2.7.0 or later of the MCP server.
+
 ## Troubleshooting
 
 ### "ShadowGit isn't running"
@@ -205,6 +217,10 @@ Update the ShadowGit app to 0.3.10 or later from [shadowgit.com](https://shadowg
 ### "This version of ShadowGit has no docs pages for AI assistants"
 
 Update the ShadowGit app to 0.3.14 or later from [shadowgit.com](https://shadowgit.com).
+
+### "This version of ShadowGit has no review comments for AI assistants"
+
+Update the ShadowGit app to 0.4.0 or later from [shadowgit.com](https://shadowgit.com).
 
 ### "ShadowGit answered with a … this version of shadowgit-mcp-server does not read"
 

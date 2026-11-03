@@ -26,7 +26,7 @@ The **Range** menu, at the top left, picks which snapshots the Lens reads:
 | **This AI session** | Your assistant's latest session. It appears once the project has had one. |
 | **Today** | Everything since midnight, in your local time. |
 
-For a range of your own, shift-click two snapshots in the list below the menu. A plain click on a snapshot opens it in **Changes**.
+The list below the menu is the snapshot list of [Changes](/snapshots#read-a-snapshot): the range's snapshots are lit, and the one it starts from is outlined. **Review this AI session** is pinned above it. For a range of your own, shift-click two snapshots. A plain click on a snapshot opens it in **Changes**.
 
 New snapshots don't redraw what you're reading. When they arrive, **Newer snapshots: update** appears at the top. Click it to move the range up to the newest snapshot.
 
@@ -37,6 +37,24 @@ New snapshots don't redraw what you're reading. When they arrive, **Newer snapsh
 - **The canvas** draws a card for each function, class or type, marked **New**, **Changed** or **Removed**, with arrows for the calls between them. Layers run as captions across the top.
 
 Scroll the steps and the canvas follows. Click a card to open its step, or press `J` and `K` to move to the next and previous step. **Where it lands**, in the canvas's corner, opens the [Map](/map) with this range lit on your whole project.
+
+Under each step, **Viewed this step's files** marks its files viewed, as in [Changes](/snapshots#read-in-reading-order). To comment on a step's code, point at a line and click the **+** beside its number, or drag across lines. **Send to agent** is at the top here too, as in [Comments](/comments).
+
+## Calls
+
+<Frame caption="A step's calls: appPage no longer calls bodyWords, and getDocs and registerDocs call functions the range changed">
+  <img src="/images/lens-calls.png" alt="A Lens step titled Change docs.ts, remove Left and 4 more, with its call trees: Calls under appPage with bodyWords struck through as removed, and Calls under getDocs and registerDocs with changed callees marked" />
+</Frame>
+
+A step that changes what its functions call shows the calls as trees, each headed like **Calls under getDocs**:
+
+| Mark | Means |
+|---|---|
+| `+` | A call the range adds |
+| `−` | A call the range removes, struck through, at the line it was on |
+| `~` | A call that stays, to a function the range changed |
+
+**Diff** shows both sides. **Before** and **After** show the calls as they were and as they are. A row linked to a card on the canvas opens it. The trees hold the calls ShadowGit reads in the code itself (**Static calls only**), so a call made through a variable, such as a callback, may be missing. A long tree ends with how many more calls it holds. Calls need ShadowGit 0.4.0 or later.
 
 ## Dependencies
 
