@@ -28,10 +28,12 @@
             "group": "Using ShadowGit",
             "pages": [
               "snapshots",
+              "comments",
               "lens",
               "map",
               "your-rules",
               "docs",
+              "keyboard",
               "settings"
             ]
           },
