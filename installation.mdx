@@ -5,7 +5,7 @@ description: "Connect ShadowGit to Claude Code, Cursor or Claude Desktop in 2 mi
 
 ## Before you start
 
-1. **The ShadowGit app**, running and tracking at least one project ([Download ShadowGit](https://shadowgit.com)). Checkpoints need version 0.3.4 or later, the Lens 0.3.6 or later, the map 0.3.10 or later, docs 0.3.14 or later, and review comments 0.4.0 or later. Versions before 0.3.3 can't update themselves: [download the latest](https://shadowgit.com) once. To track a project, click **Add repository** in the app and pick its folder.
+1. **The ShadowGit app**, running and tracking at least one project ([Download ShadowGit](https://shadowgit.com)). Saved snapshots need version 0.3.4 or later, the Lens 0.3.6 or later, the map 0.3.10 or later, docs 0.3.14 or later, review comments 0.4.0 or later, and Get started and Review after 0.4.0. Versions before 0.3.3 can't update themselves: [download the latest](https://shadowgit.com) once. To track a project, click **Add a project** in the app and pick its folder.
 2. **Node.js 20 or later** ([Download Node.js](https://nodejs.org)). Check with `node --version`.
 3. **Git** ([Download Git](https://git-scm.com/downloads)). Check with `git --version`.
 
@@ -58,12 +58,26 @@ npm uninstall -g shadowgit-mcp-server
 
 Then set ShadowGit up again for your tool as described above. In Claude Code, run `claude mcp remove shadowgit` first.
 
+## Get started in the app {#get-started-in-the-app}
+
+<Frame caption="Get started, on an app with no project yet">
+  <img src="/images/get-started.png" alt="ShadowGit with no project: a line on what it does, then three steps, Add a project with its button, Connect your assistant with tabs for Claude Code, Cursor and Claude Desktop and the command to run, and Review its first session" />
+</Frame>
+
+The app opens on **Get started**, three steps that tick themselves as they happen:
+
+1. **Add a project.** Ticks once ShadowGit has taken the project's first snapshot.
+2. **Connect your assistant.** A tab for each of Claude Code, Cursor and Claude Desktop holds its setup command, with a button to copy it. A line says ShadowGit is waiting to hear from your assistant, and the step ticks the first time your assistant reaches ShadowGit for a project it watches, naming it. Then the sidebar says, for example, "Claude Code connected".
+3. **Review its first session.** Ticks when you mark a session reviewed in [Review](/review).
+
+Once you've added a project, Get started shrinks to **Get started 1/3** in the sidebar until the three are done. Click it, or **Help**, to open it again, with links to these docs. **Hide** puts it away.
+
 ## Check that it works
 
 Ask your assistant:
 
 ```text
-Show me my ShadowGit repositories
+Show me my ShadowGit projects
 ```
 
 It lists the projects ShadowGit tracks, with their last snapshot and any active session.
@@ -91,7 +105,7 @@ What changed in webshop in the last hour?
 ```
 
 ```text
-Show me the last 10 commits in webshop
+Show me the last 10 snapshots in webshop
 ```
 
 ### Your project's architecture {#architecture}
@@ -108,11 +122,11 @@ Your assistant reads ShadowGit's [Map](/map) of the project: its areas and layer
 
 The map counts the calls and imports it can follow in the code. It leaves out test files, and code put together while the program runs, such as an import whose path is built from strings. A call to a method isn't always traced to its class, so a method may have more callers than the map lists. When the map is a few snapshots behind the newest, your assistant is told which files changed since.
 
-If your project has [rules](/your-rules), such as "src/jobs never depends on src/api", your assistant reads the ones that hold for the code it's about to change, and keeps to them. Its checkpoints are checked against them, and it tells you why when a change needs a link a rule names. This needs ShadowGit 0.3.11 or later and version 2.5.0 or later of the MCP server.
+If your project has [rules](/your-rules), such as "src/jobs never depends on src/api", your assistant reads the ones that hold for the code it's about to change, and keeps to them. Each snapshot it saves is checked against them, and it tells you why when a change needs a link a rule names. This needs ShadowGit 0.3.11 or later and version 2.5.0 or later of the MCP server.
 
 This needs the ShadowGit app running, in version 0.3.10 or later.
 
-### Sessions and checkpoints
+### Sessions {#sessions}
 
 A session keeps an assistant's edits together. Before a change that touches several files:
 
@@ -126,33 +140,33 @@ A session keeps an assistant's edits together. Before a change that touches seve
   <Step title="Let your assistant make its changes">
     Automatic snapshots stay paused while it works.
   </Step>
-  <Step title="Save a checkpoint">
+  <Step title="Save a snapshot">
     ```text
-    Create a checkpoint with message 'Fixed auth bug'
+    Save a snapshot in ShadowGit named 'Fixed auth bug'
     ```
-    ShadowGit saves the changes as one snapshot with that title, leaving out the files listed in `.shadowgit-ignore`.
+    ShadowGit saves the changes as one snapshot with that name, leaving out the files listed in `.shadowgit-ignore`.
   </Step>
   <Step title="End the session">
     ```text
     End the current ShadowGit session
     ```
-    Automatic snapshots resume.
+    Automatic snapshots resume, and your assistant tells you where to review the session: open the project in ShadowGit, then **Review session**.
   </Step>
 </Steps>
 
-Your assistant may do this by itself when it's about to edit several files, and in a project with [rules](/your-rules) before any edit, so its checkpoint is checked against them. The ShadowGit app shows active AI sessions in its sidebar, and ends a forgotten session on its own an hour to an hour and a half after it started.
+Your assistant does this by itself when it's about to edit several files, and in a project with [rules](/your-rules) before any edit, so each snapshot it saves is checked against them. While a session runs, [Activity](/activity)'s card says your assistant is working. A session ends when your assistant ends it, after 30 minutes with no change in the project, or 2 hours after your assistant last reached ShadowGit, so a session left behind never holds snapshots back for long. Being told where to review needs ShadowGit after 0.4.0 and version 2.9.0 or later of the MCP server.
 
-Sessions and checkpoints need the ShadowGit app running. Reading history works while it's closed.
+Sessions and saved snapshots need the ShadowGit app running. Reading history works while it's closed.
 
 ### The Lens in your assistant's words {#lens-words}
 
-ShadowGit's [Lens](/lens) shows a range of snapshots as numbered steps beside a canvas of the code they touch. On its own, ShadowGit writes the Lens's text from the code. Your assistant, which made the change, can write it instead. At the end of a session, ask:
+ShadowGit's [Lens](/lens) shows a change as numbered steps beside a canvas of the code it touches. On its own, ShadowGit writes the Lens's text from the code. Your assistant, which made the change, writes it instead at the end of a session. To ask anyway:
 
 ```text
 Write the Lens words for this session
 ```
 
-Your assistant reads the session's Lens, then writes a summary, a title and a sentence or two for each step, and the role each component plays. In the Lens, pick **This AI session** to read them. ShadowGit keeps the words in its history: a component's role still shows in later ranges while its code is unchanged.
+Your assistant reads the session's Lens, then writes a summary, a title and a sentence or two for each step, and the role each component plays. Open the session in [Review](/review) and click **Lens** to read them. ShadowGit keeps the words in its history: a component's role still shows in later changes while its code is unchanged.
 
 Your assistant also reads the session's [dependencies](/lens#dependencies), such as "jobs depends on api for the first time", so its words can say why one appeared. This needs ShadowGit 0.3.11 or later and version 2.4.0 or later of the MCP server.
 
@@ -178,7 +192,7 @@ This needs the ShadowGit app running, in version 0.3.14 or later, and version 2.
 
 ### Your review comments {#comments}
 
-When you've sent [comments](/comments) from ShadowGit's **Changes** or Lens, ask:
+When you've sent [comments](/comments) from ShadowGit's Review, ask:
 
 ```text
 Address my ShadowGit review comments
@@ -192,17 +206,17 @@ This needs the ShadowGit app running, in version 0.4.0 or later, and version 2.7
 
 ### "ShadowGit isn't running"
 
-Your assistant tried to start a session or save a checkpoint while the app was closed. Open ShadowGit and ask again.
+Your assistant tried to start a session or save a snapshot while the app was closed. Open ShadowGit and ask again.
 
 ### "ShadowGit is not tracking any project yet"
 
-Click **Add repository** in the app and pick your project's folder. ShadowGit takes the first snapshot right away.
+Click **Add a project** in the app and pick your project's folder. ShadowGit takes the first snapshot right away.
 
 ### "No ShadowGit project contains …"
 
 Your assistant was started in a folder ShadowGit doesn't track, and ShadowGit tracks more than one project, so it can't pick one. Add that folder in the app, or name one of your tracked projects in your question.
 
-### "This version of ShadowGit can't create checkpoints"
+### "This version of ShadowGit can't save snapshots for AI assistants"
 
 Update the ShadowGit app to 0.3.4 or later from [shadowgit.com](https://shadowgit.com).
 
@@ -233,7 +247,7 @@ The ShadowGit app is newer than the MCP server your assistant runs. Quit your AI
    ```bash
    npx -y shadowgit-mcp-server
    ```
-   It should start and wait without printing anything. Stop it with `Ctrl+C`. If it prints an error instead, that error is the problem.
+   It starts and waits without printing anything. Stop it with `Ctrl+C`. If it prints an error instead, that error is the problem.
 3. Then follow the checks for your tool: [Claude Code](/ai-tools/claude-code#troubleshooting) or [Cursor](/ai-tools/cursor#troubleshooting). In Claude Desktop, quit the app completely and open it again; **Settings → Developer** shows whether ShadowGit connected, and the server's errors are in `mcp-server-shadowgit.log`:
    - macOS: `~/Library/Logs/Claude`
    - Windows: `%APPDATA%\Claude\logs`
