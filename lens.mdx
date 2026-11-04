@@ -1,64 +1,52 @@
 ---
 title: "The Lens"
-description: "Read a range of snapshots as numbered steps beside a canvas of the code they touch"
+description: "Read a change as numbered steps beside a canvas of the code it touches"
 icon: "glasses"
 ---
 
-The Lens shows what a range of snapshots does to your code before you read the diff. Each numbered step names the functions, classes and types it adds, changes or removes, and a canvas beside the steps draws those pieces and how they call each other.
+The Lens shows what a change does to your code before you read the diff. Each numbered step names the functions, classes and types it adds, changes or removes, and a canvas beside the steps draws those pieces and how they call each other.
 
-<Frame caption="The Lens of an AI session, in the words of the assistant that made the change">
-  <img src="/images/lens.png" alt="The Lens: a summary and one numbered step on the left, a canvas of new and changed functions on the right" />
+<Frame caption="The Lens of Claude Code's session, in the words of the assistant that made the change">
+  <img src="/images/lens.png" alt="The Lens in Review: the change's counts, Claude Code's summary and the names it saved its snapshots with on the left, then step 1, Speak ShadowGit's words, and a canvas of new and changed functions on the right" />
 </Frame>
 
 ## Open the Lens
 
-Select a project and click **Lens**, next to **Changes** and **Map** at the top right. It's there once the project has a snapshot. The sidebar folds to icons while you read; **Changes** brings it back.
+The Lens is one of [Review](/review)'s three views: open a change, then click **Lens** at the top right, or press `G` then `L`. It reads the change Review has open, a session, your own changes or two snapshots you compare.
 
-The Lens needs ShadowGit 0.3.6 or later.
+The Lens needs ShadowGit 0.3.6 or later, and is a view in Review after 0.4.0.
 
-## Pick a range
-
-The **Range** menu, at the top left, picks which snapshots the Lens reads:
-
-| Range | What it covers |
-|---|---|
-| **Since last checkpoint** | From the newest snapshot back to your last checkpoint. The Lens opens on this one. |
-| **This AI session** | Your assistant's latest session. It appears once the project has had one. |
-| **Today** | Everything since midnight, in your local time. |
-
-The list below the menu is the snapshot list of [Changes](/snapshots#read-a-snapshot): the range's snapshots are lit, and the one it starts from is outlined. **Review this AI session** is pinned above it. For a range of your own, shift-click two snapshots. A plain click on a snapshot opens it in **Changes**.
-
-New snapshots don't redraw what you're reading. When they arrive, **Newer snapshots: update** appears at the top. Click it to move the range up to the newest snapshot.
+New snapshots don't redraw what you're reading. When they arrive, **Newer snapshots: update** appears at the top. Click it to read the change up to the newest snapshot.
 
 ## Read it
 
-- **The top** names the range and counts its snapshots, files, added and removed lines and changes. Below the counts are a summary and the checkpoints in the range, with their messages, then the links the range adds that [your rules](/your-rules) name, and the range's [dependencies](#dependencies).
+- **The top** counts the change's snapshots, files, added and removed lines and changes. Below the counts are a summary, the names of the snapshots saved in the change, the links the change adds that [your rules](/your-rules) name, and the change's [dependencies](#dependencies).
 - **Each step** says what it adds, changes or removes, in order. Its names link to their cards on the canvas. **Also in this step** lists the other pieces it touches, and a line like "Reaches 14 symbols in 5 files" says how much code depends on it. **Show code** opens the step's code.
 - **The canvas** draws a card for each function, class or type, marked **New**, **Changed** or **Removed**, with arrows for the calls between them. Layers run as captions across the top.
 
-Scroll the steps and the canvas follows. Click a card to open its step, or press `J` and `K` to move to the next and previous step. **Where it lands**, in the canvas's corner, opens the [Map](/map) with this range lit on your whole project.
+Scroll the steps and the canvas follows. Click a card to open its step, or press `J` and `K` to move to the next and previous step. **Where it lands**, in the canvas's corner, opens the change on the [Map](/map#where-a-change-lands).
 
-Under each step, **Viewed this step's files** marks its files viewed, as in [Changes](/snapshots#read-in-reading-order). To comment on a step's code, point at a line and click the **+** beside its number, or drag across lines. **Send to agent** is at the top here too, as in [Comments](/comments).
+Under each step, **Viewed this step's files** marks its files viewed, as in [Files](/review#files). To comment on a step's code, point at a line and click the **+** beside its number, or drag across lines. The button that sends your comments is at the top here too, as in [Comments](/comments).
 
 ## Calls
 
-<Frame caption="A step's calls: appPage no longer calls bodyWords, and getDocs and registerDocs call functions the range changed">
-  <img src="/images/lens-calls.png" alt="A Lens step titled Change docs.ts, remove Left and 4 more, with its call trees: Calls under appPage with bodyWords struck through as removed, and Calls under getDocs and registerDocs with changed callees marked" />
+<Frame caption="A step's calls: new calls marked with +, and calls to functions the change altered marked with ~">
+  <img src="/images/lens-calls.png" alt="A Lens step's call trees, Calls under LISTS_PROJECTS.passed and Calls under checkpoint, with added calls marked + and changed callees marked ~, and the Diff, Before and After switch above them" />
 </Frame>
 
 A step that changes what its functions call shows the calls as trees, each headed like **Calls under getDocs**:
 
 | Mark | Means |
 |---|---|
-| `+` | A call the range adds |
-| `−` | A call the range removes, struck through, at the line it was on |
-| `~` | A call that stays, to a function the range changed |
+| `+` | A call the change adds |
+| `−` | A call the change removes, struck through, at the line it was on |
+| `~` | A call that stays, to a function the change altered |
 
 **Diff** shows both sides. **Before** and **After** show the calls as they were and as they are. A row linked to a card on the canvas opens it. The trees hold the calls ShadowGit reads in the code itself (**Static calls only**), so a call made through a variable, such as a callback, may be missing. A long tree ends with how many more calls it holds. Calls need ShadowGit 0.4.0 or later.
 
 ## Dependencies
 
-Under the summary, **Dependencies** says what the range makes depend on what, between your project's areas (the folders the [Map](/map) draws) and its layers:
+Under the summary, **Dependencies** says what the change makes depend on what, between your project's areas (the parts the [Map](/map) draws) and its layers:
 
 | Line | Means |
 |---|---|
@@ -75,34 +63,34 @@ The Lens lists up to 12 lines, and says how many more there are. Dependencies ne
 
 ## Words from your assistant
 
-ShadowGit writes the steps from the code on its own. The assistant that made the change can write them instead: a summary, a title and a sentence or two for each step, and the role each piece plays. At the end of a session, ask it:
+ShadowGit writes the steps from the code on its own. The assistant that made the change can write them instead: a summary, a title and a sentence or two for each step, and the role each piece plays. Your assistant does it at the end of a session without being asked. To ask anyway:
 
 ```text
 Write the Lens words for this session
 ```
 
-The Lens then shows "Words by Claude Code · every name checked against the code graph" (or your assistant's name), and picks up the words within a few seconds, without a reload. Under **The author says**, a step can quote the checkpoint message behind it. A step your assistant didn't word says "From the code alone". This needs the [ShadowGit MCP server](/installation) set up in your assistant.
+The Lens then shows "Words by Claude Code · every name checked against the code graph" (or your assistant's name), and picks up the words within a few seconds, without a reload. Under **The author says**, a step can quote the name of a snapshot your assistant saved. A step your assistant didn't word says "From the code alone". This needs the [ShadowGit MCP server](/installation) set up in your assistant.
 
-The words belong to that range. A piece's role also shows in later ranges while its code is unchanged. ShadowGit keeps the words in the project's `.shadowgit.git`, on your computer.
+The words belong to that change. A piece's role also shows in later changes while its code is unchanged. ShadowGit keeps the words in the project's `.shadowgit.git`, on your computer.
 
 ## What the Lens reads
 
-The Lens reads code in TypeScript, JavaScript, Python, Java, C, C++, C#, Go, Rust, Kotlin, PHP, Ruby and Swift. Other files, such as docs, config and images, show in **Changes** but not in the Lens. A range that changes only those says "Nothing in this range changes code", with **Show the changes** to open them.
+The Lens reads code in TypeScript, JavaScript, Python, Java, C, C++, C#, Go, Rust, Kotlin, PHP, Ruby and Swift. Other files, such as docs, config and images, show in [Files](/review#files) but not in the Lens. A change that touches only those says "Nothing here changes code", with **Show the files** to open them.
 
 Limits:
 
-- A snapshot of more than 20,000 files or 64 MB of source code is too large to draw, and so is a range whose two ends together pass that.
+- A snapshot of more than 20,000 files or 64 MB of source code is too large to draw, and so is a change whose two ends together pass that.
 - Source files over 512,000 characters are skipped.
-- A step shows the code of up to 12 files. Open the rest in **Changes**.
+- A step shows the code of up to 12 files. Read the rest in Files.
 
 ## Troubleshooting
 
-When the Lens can't draw a range, it says "Couldn't draw this range" and why.
+When the Lens can't draw a change, it says "Couldn't draw the Lens" and why.
 
 ### "This snapshot has too many files for the code graph" or "This snapshot is too large for the code graph"
 
-The project's snapshots hold more than 20,000 files or 64 MB of source. Generated code and copied-in dependencies are the usual cause. Add their folders to `.shadowgit-ignore` (see [Leave files out](/snapshots#leave-files-out)), and the next snapshots leave them out.
+The project's snapshots hold more than 20,000 files or 64 MB of source. Generated code and copied-in dependencies are the usual cause. Add their folders to `.shadowgit-ignore` (see [Leave files out](/activity#leave-files-out)), and the next snapshots leave them out.
 
 ### "Drawing the Lens took longer than 120 s"
 
-Pick a smaller range, with fewer snapshots or fewer changed files.
+Read a smaller change: **Compare two snapshots…** closer together, with fewer changed files between them.

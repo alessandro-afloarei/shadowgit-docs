@@ -6,15 +6,15 @@ icon: "book-open"
 
 Docs keeps a page for each area of your [Map](/map), plus an Overview of the whole project. Your AI assistant writes the words, through the [ShadowGit MCP server](/installation), while it still has the code in mind: at the end of a session that changed the area, or when you ask. ShadowGit adds the facts it draws from the map, checks every name the words link, and counts the changes to the area since the words were written. A page never reads as current when the code has moved on.
 
-ShadowGit runs no model and needs no API key. The words come from the assistant you already use.
+ShadowGit runs no model and needs no API key. The words come from the assistant you already use. This page describes Docs in ShadowGit after 0.4.0, where it opens from Project.
 
-<Frame caption="The billing page: Claude Code's words, one change to the area since, and the facts ShadowGit draws from the map">
-  <img src="/images/docs.png" alt="Docs: a rail of pages with their states on the left, and the billing page, with a summary, paragraphs that link functions, the line 1 change since these words, and the area's facts" />
+<Frame caption="A page in Claude Code's words, current, with the facts ShadowGit draws from the map">
+  <img src="/images/docs.png" alt="Project with Docs open beside the whole map: a rail of pages with their states, and the page of tools: docs, comments and 3 more, reading Current, with Claude Code's summary and words, its byline, and the area's facts" />
 </Frame>
 
 ## Open Docs
 
-Select a project and click **Docs**, after **Map** at the top right. The rail on the left lists the Overview, then the areas in the Map's order, largest first. Under each name is how current its page is:
+Select a project, click **Project** at the top right, then **Docs** beside it. Docs opens beside the whole map. The rail lists the Overview, then the areas in the Map's order, largest first. Under each name is how current its page is:
 
 | The rail says | Means |
 |---|---|
@@ -44,7 +44,7 @@ The Overview's facts are the whole project's: its files, symbols, areas and proc
 A page with no words shows its facts and what to ask your assistant, with a **Copy** button. ShadowGit never starts an assistant itself.
 
 <Frame caption="A page with no words yet: its facts, and what to ask your assistant">
-  <img src="/images/docs-no-words.png" alt="Docs: the jobs page, reading No words yet, with a box saying Ask your agent to write this page, the prompt and a Copy button, above the area's facts" />
+  <img src="/images/docs-no-words.png" alt="Docs: the Overview, reading No words yet, with a box of what to ask your assistant, the prompt Document this project in ShadowGit and a Copy button, above the project's facts and its areas" />
 </Frame>
 
 ## How current a page is
@@ -79,7 +79,7 @@ Your assistant reads the pages too. When it looks at the map before it edits, it
 
 ## Where pages are kept
 
-ShadowGit keeps the pages in the project's `.shadowgit.git`, on your computer, under `refs/shadowgit/docs`. Each write is a new version, and older versions stay kept. Docs shows the newest words. The pages never go in your project's files or your own git repository.
+ShadowGit keeps the pages in the project's `.shadowgit.git`, on your computer, under `refs/shadowgit/docs`. Each write is a new version, and older versions stay kept. Docs shows the newest words. The pages never go in your project's files or your own git history.
 
 ## Privacy
 
@@ -87,7 +87,7 @@ ShadowGit uploads none of your pages. What your assistant reads to write them go
 
 ## Requirements
 
-Docs needs ShadowGit 0.3.14 or later. Your assistant writes and reads the pages with version 2.6.0 or later of the [MCP server](/installation).
+Docs needs ShadowGit 0.3.14 or later, and opens from Project in ShadowGit after 0.4.0. Your assistant writes and reads the pages with version 2.6.0 or later of the [MCP server](/installation).
 
 ## Troubleshooting
 

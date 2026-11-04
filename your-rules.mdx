@@ -1,13 +1,13 @@
 ---
 title: "Your rules"
-description: "Write down what must not depend on what, and ShadowGit checks each AI checkpoint against it"
+description: "Write down what must not depend on what, and ShadowGit checks each snapshot your assistant saves against it"
 icon: "list-check"
 ---
 
-You write your project's architecture rules in one plain file, `.shadowgit-rules`, such as "src/jobs never depends on src/api". ShadowGit checks each AI checkpoint against them, and shows the links a change adds that one of your rules names: in the [Lens](/lens), on the [Map](/map) and in your assistant's answers. The judgement is yours, in the rule. ShadowGit states the link and quotes your rule.
+You write your project's architecture rules in one plain file, `.shadowgit-rules`, such as "src/jobs never depends on src/api". ShadowGit checks each snapshot your assistant saves against them, and shows the links a change adds that one of your rules names: in the [Lens](/lens), on the [Map](/map) and in your assistant's answers. The judgement is yours, in the rule. ShadowGit states the link and quotes your rule. Rules need ShadowGit 0.3.11 or later. This page shows them in ShadowGit after 0.4.0.
 
-<Frame caption="The Lens of an AI session: your rule, its reason, and the two links the session adds that it names">
-  <img src="/images/rules-lens.png" alt="The Lens: under the summary, a Your rules block quotes src/jobs never depends on src/api with its reason, the import and the call the session adds, and step 1" />
+<Frame caption="The Lens of Claude Code's session: your rule, its reason, and the two links the session adds that it names">
+  <img src="/images/rules-lens.png" alt="The Lens: under the summary, a Your rules block quotes src/tools/comments.ts never depends on src/tools/rules.ts with its reason, the import and the call the session adds, and step 1" />
 </Frame>
 
 ## Write your rules
@@ -21,9 +21,9 @@ only src/lib/supabase depends on @supabase/supabase-js because the client is bui
 nothing depends on lodash because the standard library covers it
 ```
 
-You can write it yourself, or ask your assistant to. Commit it with your code if you like, so your team and their assistants work to the same rules.
+You can write it yourself, or ask your assistant to. Keep it in your own git with your code if you like, so your team and their assistants work to the same rules.
 
-To start one from the app, open the [Map](/map) and click **Rules**, at its top right, then **Write rules**. ShadowGit creates the file with a commented example, and **Open .shadowgit-rules** opens it in your editor.
+To start one from the app, open the command palette (`⌘K`), pick **Your rules…**, then **Write rules**. ShadowGit creates the file with a commented example, and **Open .shadowgit-rules** opens it in your editor. Once the file exists, **Rules**, at the top right of the map in Project and in Review, opens the same panel. The panel and **Your rules…** need ShadowGit after 0.4.0.
 
 ShadowGit reads the file from your project's folder each time it checks, so a rule you wrote a minute ago applies.
 
@@ -61,29 +61,29 @@ At most 100 rules and 64 KB of the file are read. A line that isn't a rule is sk
 
 ### In the Lens
 
-**Your rules** sits under the summary, before [Dependencies](/lens#dependencies). For each rule that names a link the range adds, it shows the rule, your reason, how many links and the first five of them, and the steps that hold them. A quiet line covers the others: "Your other rule names no link this range adds." Each step that holds such a link says "adds a link your rule names", with the rule.
+**Your rules** sits under the summary, before [Dependencies](/lens#dependencies). For each rule that names a link the change adds, it shows the rule, your reason, how many links and the first five of them, and the steps that hold them. A quiet line covers the others, the rules that name no link the change adds. Each step that holds such a link says "adds a link your rule names", with the rule.
 
-A range that changes `.shadowgit-rules` says so: "This range changes .shadowgit-rules: adds “…”, removes “…”." This shows even when the range changes no code, so a rule your assistant deleted always shows.
+A change that edits `.shadowgit-rules` says so, with the rules it adds and removes. This shows even when the change touches no code, so a rule your assistant deleted always shows.
 
-Every range is checked when the project has rules, your own snapshots included.
+Every change is checked when the project has rules, your own snapshots included.
 
 ### On the Map
 
-**Where it lands** lists the same lines for the range it lights. **Rules**, at the top right of the Map, opens your rules as ShadowGit reads them: each rule with its reason, the lines read as no rule, and the names read as packages. The panel reads the file again when ShadowGit's window gains focus, so an edit you made in your editor shows.
+**Where it lands** lists the same lines for the change it shows. **Rules**, at the top right of the Map, in Project or in Review, opens your rules as ShadowGit reads them: each rule with its reason, the lines read as no rule, and the names read as packages. The panel reads the file again when ShadowGit's window gains focus, so an edit you made in your editor shows.
 
-<Frame caption="The Rules panel: two rules with their reasons, a line read as no rule, and lodash read as a package">
-  <img src="/images/rules-panel.png" alt="The Map with its Rules panel open: the rules src/jobs never depends on src/api and nothing depends on lodash, a line 4 read as no rule, and lodash under Read as packages" />
+<Frame caption="The Your rules panel: a rule as ShadowGit reads it, with its reason">
+  <img src="/images/rules-panel.png" alt="Project with the Your rules panel open beside the map: the rule src/tools/comments.ts never depends on src/tools/rules.ts with its reason, and Open .shadowgit-rules" />
 </Frame>
 
 ### In your assistant
 
-Through the [ShadowGit MCP server](/installation), your assistant reads the rules that hold for the files it's about to change before its first edit, and works in a session. When it saves a checkpoint, ShadowGit checks the session against your rules, and the checkpoint's answer lists each link a rule names, with the rule and your reason. Your assistant is asked to take such a link out, or to tell you why it's there.
+Through the [ShadowGit MCP server](/installation), your assistant reads the rules that hold for the files it's about to change before its first edit, and works in a session. When it saves a snapshot, ShadowGit checks the session against your rules, and the answer lists each link a rule names, with the rule and your reason. Your assistant is asked to take such a link out, or to tell you why it's there.
 
-The check never refuses or holds back a checkpoint: ShadowGit saves it first, then checks. A check that takes longer than 45 seconds goes on, and the Lens shows it when it's done.
+The check never refuses or holds back a saved snapshot: ShadowGit saves it first, then checks. A check that takes longer than 45 seconds goes on, and the Lens shows it when it's done.
 
 ## Privacy
 
-ShadowGit reads your rules on your computer. Its usage data counts each checkpoint's check (its outcome, how many rules and how many named a link) and a rules file created from the panel, never a rule, a path or a package. What your assistant reads goes to your AI provider, like any file it opens.
+ShadowGit reads your rules on your computer. Its usage data counts each check of a saved snapshot (its outcome, how many rules and how many named a link) and a rules file created from the panel, never a rule, a path or a package. What your assistant reads goes to your AI provider, like any file it opens.
 
 A project you cloned may come with a `.shadowgit-rules` its authors wrote. Your assistant reads each rule as what the file says, and keeps to the links it names.
 

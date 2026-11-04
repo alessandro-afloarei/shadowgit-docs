@@ -27,12 +27,13 @@
           {
             "group": "Using ShadowGit",
             "pages": [
-              "snapshots",
-              "comments",
+              "activity",
+              "review",
               "lens",
               "map",
-              "your-rules",
+              "comments",
               "docs",
+              "your-rules",
               "keyboard",
               "settings"
             ]
@@ -101,5 +102,8 @@
       "x": "https://x.com/alessandro_afl",
       "linkedin": "https://www.linkedin.com/in/alessandro-afloarei/"
     }
-  }
+  },
+  "redirects": [
+    { "source": "/snapshots", "destination": "/activity" }
+  ]
 }

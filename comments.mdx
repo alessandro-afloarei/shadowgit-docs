@@ -4,10 +4,10 @@ description: "Comment on the lines of a change, send the comments to your AI ass
 icon: "comment"
 ---
 
-When you review a change in **Changes**, comments say what you want different. They stay drafts, seen only by you, until you send them. Your assistant then reads them, changes what each one asks, and replies under each. Only you close a comment.
+When you read a change in [Review](/review), comments say what you want different. They stay drafts, seen only by you, until you send them. Your assistant then reads them, changes what each one asks, and replies under each. Only you close a comment. Comments need ShadowGit 0.4.0 or later, and this page describes them in ShadowGit after 0.4.0, where they live in Review.
 
-<Frame caption="A question being written under line 31, with the line it quotes">
-  <img src="/images/comment.png" alt="Changes with a comment being written under line 31 of start-session.ts: the tags Change, Question and Note, the quoted line, the words, and Save" />
+<Frame caption="A question being written under line 30, with the line it quotes">
+  <img src="/images/comment.png" alt="Files in Review with a comment being written under line 30 of session-api.ts: the tags Change, Question and Note, the quoted line, the words, and Save" />
 </Frame>
 
 ## Write a comment
@@ -21,18 +21,18 @@ A saved comment is a draft. It shows under its lines, and it stays after ShadowG
 ## Send them to your assistant
 
 <Frame caption="The text your assistant gets, before you send it">
-  <img src="/images/send.png" alt="The Send to agent popover on its Preview tab: the text with both comments, the lines they quote, and the files not viewed yet, above the Send button" />
+  <img src="/images/send.png" alt="The Send comments popover on its Preview tab: the text with both comments and the lines they quote, above the Send button" />
 </Frame>
 
-**Send 2 to agent**, at the top, counts your drafts. Click it to see them. **Preview** shows the exact text your assistant gets. Then click **Send**, or press `⌘↵`. ShadowGit:
+**Send 2 comments to Claude Code**, at the top, counts your drafts and names your assistant, or says "your assistant" when ShadowGit doesn't know its name. Once you've read Read first, it's the [main button](/review#the-main-button). Click it to see them. **Preview** shows the exact text your assistant gets. Then click **Send**, or press `⌘↵`. ShadowGit:
 
 - marks every draft sent, so your assistant can read them through the [ShadowGit MCP server](/installation);
 - copies the text, so you can paste it into any assistant.
 
-A Send takes every draft in the project, whichever range you wrote it on. The text names the project, and the range when you wrote every comment in it. Each comment gives its tag, its file and lines, the function or class around them, the lines it quotes and your words. The last line lists up to 20 files of the range you hadn't viewed, so your assistant doesn't take silence for approval:
+A Send takes every draft in the project, whichever change you wrote it on. The text names the project, and the change when you wrote every comment in it. Each comment gives its tag, its file and lines, the function or class around them, the lines it quotes and your words. The last line lists up to 20 files of the change you hadn't viewed, so your assistant doesn't take silence for approval:
 
 ```text
-Review comments from ShadowGit · webshop · This AI session (8e6ec92..4f2a91c)
+Review comments from ShadowGit · webshop · Claude Code's session · "Keep sessions in the database" (8e6ec92..4f2a91c)
 Change only what each comment asks. With the ShadowGit MCP server, reply to each with reply_to_review_comment.
 
 1. [Change] src/sessions/store.ts:34-41 (SessionStore.find) · #12
@@ -69,7 +69,7 @@ This needs the ShadowGit app 0.4.0 or later and version 2.7.0 or later of the MC
 
 ## Replies and changes since
 
-A reply shows under its comment, like "Claude Code at 9b1c2ab: Returned the row on a cache miss.", with a snapshot. During a session, that's the snapshot the session's checkpoint or end makes, which holds the change. Until then the reply reads "Claude Code, session in progress". Outside a session, it's the newest snapshot when the reply came. A reply never closes a comment.
+A reply shows under its comment, like "Claude Code at 9b1c2ab: Returned the row on a cache miss.", with a snapshot. During a session, that's the next snapshot the session saves or the one its end makes, which holds the change. Until then the reply reads "Claude Code, session in progress". Outside a session, it's the newest snapshot when the reply came. A reply never closes a comment.
 
 When a later snapshot changes the lines a comment quotes, the comment says "Lines changed since, in 9b1c2ab". That's a fact about the lines, not a status. The comment stays open until you close it.
 
@@ -86,7 +86,7 @@ When a later snapshot changes the lines a comment quotes, the comment says "Line
 - **Copy** copies one comment's text.
 - **Resolve** closes a sent comment, with **Undo** for a moment. **Open again** brings it back.
 
-A comment shows under its lines when the range you're reading has those lines as the comment quotes them. The panel lists every comment, those on a whole file included.
+A comment shows under its lines when the change you're reading has those lines as the comment quotes them. The panel lists every comment, those on a whole file included.
 
 ## Where comments are kept
 
