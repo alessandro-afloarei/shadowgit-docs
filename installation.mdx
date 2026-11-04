@@ -5,13 +5,13 @@ description: "Connect ShadowGit to Claude Code, Cursor or Claude Desktop in 2 mi
 
 ## Before you start
 
-1. **The ShadowGit app**, running and tracking at least one project ([Download ShadowGit](https://shadowgit.com)). Saved snapshots need version 0.3.4 or later, the Lens 0.3.6 or later, the map 0.3.10 or later, docs 0.3.14 or later, review comments 0.4.0 or later, and Activity, Review, Project and Get started after 0.4.0. Versions before 0.3.3 can't update themselves: [download the latest](https://shadowgit.com) once. To track a project, click **Add a project** in the app and pick its folder.
+1. **The ShadowGit app**, running and tracking at least one project ([Download ShadowGit](https://shadowgit.com)). Saved snapshots need version 0.3.4 or later, the Lens 0.3.6 or later, the map 0.3.10 or later, docs 0.3.14 or later, review comments 0.4.0 or later, and Activity, Review, Project and Get started 0.5.0 or later. Versions before 0.3.3 can't update themselves: [download the latest](https://shadowgit.com) once. To track a project, click **Add a project** in the app and pick its folder.
 2. **Node.js 20 or later** ([Download Node.js](https://nodejs.org)). Check with `node --version`.
 3. **Git** ([Download Git](https://git-scm.com/downloads)). Check with `git --version`.
 
 You don't install the MCP server yourself: your AI tool starts it with `npx`, which downloads it the first time.
 
-## Connect your AI tool
+## Connect your assistant
 
 <Columns cols={2}>
   <Card
@@ -150,11 +150,11 @@ A session keeps an assistant's edits together. Before a change that touches seve
     ```text
     End the current ShadowGit session
     ```
-    Automatic snapshots resume, and your assistant tells you where to review the session: open the project in ShadowGit, then **Review session**.
+    Automatic snapshots resume. If the session changed anything, your assistant tells you where to review it: open the project in ShadowGit, then **Review session**.
   </Step>
 </Steps>
 
-Your assistant does this by itself when it's about to edit several files, and in a project with [rules](/your-rules) before any edit, so each snapshot it saves is checked against them. While a session runs, [Activity](/activity)'s card says your assistant is working. A session ends when your assistant ends it, after 30 minutes with no change in the project, or 2 hours after your assistant last reached ShadowGit, so a session left behind never holds snapshots back for long. Being told where to review needs ShadowGit after 0.4.0 and version 2.9.0 or later of the MCP server.
+Your assistant does this by itself when it's about to edit several files, and in a project with [rules](/your-rules) before any edit, so each snapshot it saves is checked against them. While a session runs, [Activity](/activity)'s card says your assistant is working. A session ends when your assistant ends it, after 30 minutes with no change in the project, or 2 hours after your assistant last reached ShadowGit, so a session left behind never holds snapshots back for long. Being told where to review needs ShadowGit 0.5.0 or later and version 2.9.0 or later of the MCP server.
 
 Sessions and saved snapshots need the ShadowGit app running. Reading history works while it's closed.
 

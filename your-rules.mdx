@@ -4,7 +4,7 @@ description: "Write down what must not depend on what, and ShadowGit checks each
 icon: "list-check"
 ---
 
-You write your project's architecture rules in one plain file, `.shadowgit-rules`, such as "src/jobs never depends on src/api". ShadowGit checks each snapshot your assistant saves against them, and shows the links a change adds that one of your rules names: in the [Lens](/lens), on the [Map](/map) and in your assistant's answers. The judgement is yours, in the rule. ShadowGit states the link and quotes your rule. Rules need ShadowGit 0.3.11 or later. This page shows them in ShadowGit after 0.4.0.
+You write your project's architecture rules in one plain file, `.shadowgit-rules`, such as "src/jobs never depends on src/api". ShadowGit checks each snapshot your assistant saves against them, and shows the links a change adds that one of your rules names: in the [Lens](/lens), on the [Map](/map) and in your assistant's answers. The judgement is yours, in the rule. ShadowGit states the link and quotes your rule. Rules need ShadowGit 0.3.11 or later. This page shows them in ShadowGit 0.5.0 and later.
 
 <Frame caption="The Lens of Claude Code's session: your rule, its reason, and the two links the session adds that it names">
   <img src="/images/rules-lens.png" alt="The Lens: under the summary, a Your rules block quotes src/tools/comments.ts never depends on src/tools/rules.ts with its reason, the import and the call the session adds, and step 1" />
@@ -23,7 +23,7 @@ nothing depends on lodash because the standard library covers it
 
 You can write it yourself, or ask your assistant to. Keep it in your own git with your code if you like, so your team and their assistants work to the same rules.
 
-To start one from the app, open the command palette (`⌘K`), pick **Your rules…**, then **Write rules**. ShadowGit creates the file with a commented example, and **Open .shadowgit-rules** opens it in your editor. Once the file exists, **Rules**, at the top right of the map in Project and in Review, opens the same panel. The panel and **Your rules…** need ShadowGit after 0.4.0.
+To start one from the app, open the command palette (`⌘K`), pick **Your rules…**, then **Write rules**. ShadowGit creates the file with a commented example, and **Open .shadowgit-rules** opens it in your editor. Once the file exists, **Rules**, at the top right of the map in Project and in Review, opens the same panel. The panel and **Your rules…** need ShadowGit 0.5.0 or later.
 
 ShadowGit reads the file from your project's folder each time it checks, so a rule you wrote a minute ago applies.
 
