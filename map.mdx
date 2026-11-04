@@ -7,7 +7,7 @@ icon: "map"
 The Map draws your whole project from its newest snapshot. Each area is a folder, or a slice of a big folder named by what it holds, such as "tools: map, rules". Each function, class and type is a dot, and lines show the calls and imports between them. It keeps up with your snapshots, and it shows where a change lands in the rest of your code.
 
 <Frame caption="Where Claude Code's session lands in the ShadowGit MCP server: new code in green, changed code in orange">
-  <img src="/images/map.png" alt="The Map view in Review: areas drawn as circles of dots, the ones the session touches outlined in orange, beside a card titled Where it lands that lists the areas the change lands in, your rules, its dependencies and what it reaches" />
+  <img src="/images/map.png" alt="The Map view in Review: areas drawn as circles of dots, the ones the session touches outlined in orange, beside a card titled Where it lands that lists the areas the change lands in, its dependencies and what it reaches" />
 </Frame>
 
 You meet the Map in two places: **Project** draws the whole project, and the **Map** view in [Review](/review) shows where the change you're reading lands. The Map needs ShadowGit 0.3.9 or later. Project and the Map view in Review need ShadowGit after 0.4.0.
@@ -19,7 +19,7 @@ Select a project and click **Project** at the top right, or press `G` then `P`. 
 - **Areas**, the default, groups the code by area.
 - **Layers** groups it by where the code runs, or else by package or folder.
 
-The card at the left names the project and the snapshot the map is drawn from, counts its symbols, areas, calls and processes, and lists its largest areas. Type in **Find a symbol or area** to find one on the map, or press `/`. Test files, and folders such as `fixtures` and `e2e`, stay off the map. **Rules** opens [your rules](/your-rules) as ShadowGit reads them. Click an area, and its card shows the summary of its [docs page](/docs), with **Read its page**. **Docs**, at the top, opens every page beside the map.
+The card at the left names the project and the snapshot the map is drawn from, counts its symbols, areas, calls and processes, and lists its largest areas. Type in **Find a symbol or area** to find one on the map, or press `/`. Test files, and folders such as `fixtures` and `e2e`, stay off the map. **Rules**, there once the project has a `.shadowgit-rules`, opens [your rules](/your-rules) as ShadowGit reads them. Click an area, and its card shows the summary of its [docs page](/docs), with **Read its page**. **Docs**, at the top, opens every page beside the map.
 
 ## Where a change lands
 

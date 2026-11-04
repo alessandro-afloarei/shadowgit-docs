@@ -5,7 +5,7 @@ description: "Connect ShadowGit to Claude Code, Cursor or Claude Desktop in 2 mi
 
 ## Before you start
 
-1. **The ShadowGit app**, running and tracking at least one project ([Download ShadowGit](https://shadowgit.com)). Saved snapshots need version 0.3.4 or later, the Lens 0.3.6 or later, the map 0.3.10 or later, docs 0.3.14 or later, review comments 0.4.0 or later, and Get started and Review after 0.4.0. Versions before 0.3.3 can't update themselves: [download the latest](https://shadowgit.com) once. To track a project, click **Add a project** in the app and pick its folder.
+1. **The ShadowGit app**, running and tracking at least one project ([Download ShadowGit](https://shadowgit.com)). Saved snapshots need version 0.3.4 or later, the Lens 0.3.6 or later, the map 0.3.10 or later, docs 0.3.14 or later, review comments 0.4.0 or later, and Activity, Review, Project and Get started after 0.4.0. Versions before 0.3.3 can't update themselves: [download the latest](https://shadowgit.com) once. To track a project, click **Add a project** in the app and pick its folder.
 2. **Node.js 20 or later** ([Download Node.js](https://nodejs.org)). Check with `node --version`.
 3. **Git** ([Download Git](https://git-scm.com/downloads)). Check with `git --version`.
 
@@ -67,7 +67,7 @@ Then set ShadowGit up again for your tool as described above. In Claude Code, ru
 The app opens on **Get started**, three steps that tick themselves as they happen:
 
 1. **Add a project.** Ticks once ShadowGit has taken the project's first snapshot.
-2. **Connect your assistant.** A tab for each of Claude Code, Cursor and Claude Desktop holds its setup command, with a button to copy it. A line says ShadowGit is waiting to hear from your assistant, and the step ticks the first time your assistant reaches ShadowGit for a project it watches, naming it. Then the sidebar says, for example, "Claude Code connected".
+2. **Connect your assistant.** A tab for each of Claude Code, Cursor and Claude Desktop holds its setup command, with a button to copy it. A line says ShadowGit is waiting to hear from your assistant. The step ticks the first time your assistant asks ShadowGit about a project it watches, naming it: ask it, for example, `How is this project organised?`. Listing your projects doesn't tick it, because that names none. Then the sidebar says, for example, "Claude Code connected".
 3. **Review its first session.** Ticks when you mark a session reviewed in [Review](/review).
 
 Once you've added a project, Get started shrinks to **Get started 1/3** in the sidebar until the three are done. Click it, or **Help**, to open it again, with links to these docs. **Hide** puts it away.
@@ -308,6 +308,6 @@ ShadowGit comes as a `.deb`, an `.rpm` and an AppImage, for x64 and arm64. Downl
 | Files left out of snapshots | `.shadowgit-ignore` inside each project |
 | Project list, settings and maps | macOS: `~/.shadowgit`<br />Windows: `%LOCALAPPDATA%\shadowgit`<br />Linux: `~/.local/share/shadowgit` |
 
-ShadowGit creates `.shadowgit-ignore` with common dependency and build folders when you add a project. To leave out more, see [Leave files out](/snapshots#leave-files-out).
+ShadowGit creates `.shadowgit-ignore` with common dependency and build folders when you add a project. To leave out more, see [Leave files out](/activity#leave-files-out).
 
 For the MCP server's own settings, see its [README on GitHub](https://github.com/alessandro-afloarei/shadowgit-mcp#configuration).

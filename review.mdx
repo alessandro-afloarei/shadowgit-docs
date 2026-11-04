@@ -14,7 +14,7 @@ icon: "list-check"
 
 - **Review session**, on [Activity](/activity)'s card, opens the session that waits for you.
 - Click any row of Activity's **What happened**: a session, a run of your changes, a saved snapshot.
-- In the command palette (`⌘K`): **Review the latest session** (`G` then `S`), **Review today**, or **Compare two snapshots…**, which lets you pick the two ends from your snapshots.
+- In the command palette (`⌘K`): **Review the latest session** (`G` then `S`), **Review since you last saved**, **Review today**, or **Compare two snapshots…**, which lets you pick the two ends from your snapshots.
 
 The top of Review names the change, says how many of its files you've read, and holds the main button and the three views. The arrow on the left goes back to Activity.
 
@@ -27,8 +27,8 @@ The button at the top right changes as you read:
 | **Start review** | You haven't started | Opens Files on the first file to read |
 | **Next file** `V` | Files under Read first are still unread | Marks the file viewed and moves to the next |
 | **Send 2 comments to Claude Code** | Read first is read and comments wait | Opens the [Send](/comments#send-them-to-your-assistant) |
-| **Mark reviewed** | Read first is read and nothing waits | Marks the session reviewed and goes back to Activity |
-| **Done** | The session is already reviewed | Goes back to Activity |
+| **Mark reviewed** | A session's Read first is read and nothing waits | Marks the session reviewed and goes back to Activity |
+| **Done** | Read first is read and the change is already reviewed, or isn't a session | Goes back to Activity |
 | **Claude Code is still working** | The session is running | Nothing yet |
 | **Newer snapshots: update** | The change moved on since you opened it | Reads the newest version |
 
@@ -55,7 +55,7 @@ The same change, two other ways:
 
 ## The "…" menu
 
-The "…" at the top holds what you need less often: **Save snapshot**, **Save snapshot with a name…**, **Compare two snapshots…**, **All snapshots**, **Restore this snapshot…** and **Tag this snapshot…**. Each is in the command palette too.
+The "…" at the top holds what you need less often: **Save snapshot**, **Save snapshot with a name…**, **Compare two snapshots…** and **All snapshots**. When Review reads one snapshot, it also holds **Restore this snapshot…** and **Tag this snapshot…**, which adds tags and a note so you can find the snapshot again. Each is in the command palette too.
 
 ## Reviewed sessions
 
