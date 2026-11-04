@@ -1,0 +1,62 @@
+---
+title: "Review"
+description: "Read one change end to end, in its files, its Lens and its map, from Start review to Mark reviewed"
+icon: "list-check"
+---
+
+<Frame caption="Claude Code's session in Review: its files in reading order, and the diff">
+  <img src="/images/review.png" alt="Review of Claude Code's session: the title, 0 of 16 read, Start review and the Files, Lens and Map views at the top, the files under Read first on the left, each tagged Code, and the diff of session-api.ts" />
+</Frame>
+
+**Review** reads one change, from its first snapshot to its last: an assistant's session, your own changes, or two snapshots you compare. It has three views of the same change, **Files**, **Lens** and **Map**, and one main button that always says what to do next. Review describes ShadowGit after 0.4.0.
+
+## Open a change
+
+- **Review session**, on [Activity](/activity)'s card, opens the session that waits for you.
+- Click any row of Activity's **What happened**: a session, a run of your changes, a saved snapshot.
+- In the command palette (`⌘K`): **Review the latest session** (`G` then `S`), **Review today**, or **Compare two snapshots…**, which lets you pick the two ends from your snapshots.
+
+The top of Review names the change, says how many of its files you've read, and holds the main button and the three views. The arrow on the left goes back to Activity.
+
+## The main button
+
+The button at the top right changes as you read:
+
+| It says | When | It does |
+|---|---|---|
+| **Start review** | You haven't started | Opens Files on the first file to read |
+| **Next file** `V` | Files under Read first are still unread | Marks the file viewed and moves to the next |
+| **Send 2 comments to Claude Code** | Read first is read and comments wait | Opens the [Send](/comments#send-them-to-your-assistant) |
+| **Mark reviewed** | Read first is read and nothing waits | Marks the session reviewed and goes back to Activity |
+| **Done** | The session is already reviewed | Goes back to Activity |
+| **Claude Code is still working** | The session is running | Nothing yet |
+| **Newer snapshots: update** | The change moved on since you opened it | Reads the newest version |
+
+Once Read first is read, a card says so: how many files you read, the comments still for your assistant, and the files in Everything else you skimmed. Nothing is sent or marked until you click. Marking a session reviewed is kept per project, across restarts.
+
+## Files
+
+Files lists the change's files on the left and shows their diff on the right.
+
+- **Reading order**, the default, lists code under **Read first**, the files more code depends on first. **Everything else** holds the rest, each tagged: tests, next to the file they test; config, docs, styles and other files; changes to comments or spacing only. Lockfiles, generated and minified files, binaries and diffs of more than 2,000 lines are folded behind one line, such as "2 lockfiles, 1 generated file folded · 4,210 lines", that opens them. **Folders** lists the same files by folder, and ShadowGit remembers your choice for each project.
+- ShadowGit works out the order a moment after you open the change. Once you scroll, click or press a key, the order holds still, and a better one waits for **Apply**.
+- Tick **Viewed** on a file, or press `V`, to mark it viewed and move to the next. ShadowGit remembers what you viewed for each version of a file, so the same version reads as viewed in any change. A file that changed again reads "Changed since you viewed it". What you viewed stays on your computer, never in your project.
+- **Unified** and **Split** switch how the diff is drawn. `]` shows or hides the list, and `J` and `K` move between files.
+- Select lines and press `C`, or click **+** beside a line number, to comment. See [Comments for your assistant](/comments).
+
+## The Lens and the Map
+
+The same change, two other ways:
+
+- **Lens** tells the change step by step, with a canvas of the code it touches. See [The Lens](/lens).
+- **Map** shows where the change lands in your whole project. See [The Map](/map#where-a-change-lands).
+
+`G` then `F`, `L` or `M` switches between the three views from anywhere.
+
+## The "…" menu
+
+The "…" at the top holds what you need less often: **Save snapshot**, **Save snapshot with a name…**, **Compare two snapshots…**, **All snapshots**, **Restore this snapshot…** and **Tag this snapshot…**. Each is in the command palette too.
+
+## Reviewed sessions
+
+A session you marked reviewed no longer waits on Activity's card. Its row stays in What happened, and you can open and read it again any time. Sessions that ended before you updated to this version count as reviewed, so Activity never opens on one from weeks ago.
