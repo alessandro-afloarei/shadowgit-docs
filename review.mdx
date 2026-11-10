@@ -32,7 +32,11 @@ The button at the top right changes as you read:
 | **Claude Code is still working** | The session is running | Nothing yet |
 | **Newer snapshots: update** | The change moved on since you opened it | Reads the newest version |
 
-Once Read first is read, a card says so: how many files you read, the comments still for your assistant, and the files in Everything else you skimmed. Nothing is sent or marked until you click. Marking a session reviewed is kept per project, across restarts.
+Once Read first is read, a card says so: how many files you read, the comments still for your assistant, and the files in Everything else you skimmed. Nothing is sent or marked until you click. A session's review is finished when you mark it reviewed, when you send its comments once it has ended, or when you go back to before it. That's kept per project, across restarts.
+
+## Your first review
+
+The first time you review a session, a strip under the header, **Your first review**, says how in three steps that tick as you do them: read the Lens, with **Show me**; check each file, with `V`; then send your comments or mark the session reviewed. **Got it** puts it away. **How to review**, in the Help menu, or **Show the review guide**, in the command palette, brings it back. This needs ShadowGit 0.6.0 or later.
 
 ## Files
 
@@ -56,6 +60,17 @@ The same change, two other ways:
 ## The "…" menu
 
 The "…" at the top holds what you need less often: **Save snapshot**, **Save snapshot with a name…**, **Compare two snapshots…** and **All snapshots**. When Review reads one snapshot, it also holds **Restore this snapshot…** and **Tag this snapshot…**, which adds tags and a note so you can find the snapshot again. Each is in the command palette too.
+
+## Go back to before a session
+
+At the end of a session's review, once the session has ended, **Go back to before this session** undoes what it changed. Its confirmation lists the session's files by what happens to each: **Goes back**, **Comes back** or **Goes away**. Files you changed after the session are listed apart, because your later edits to them go back too.
+
+- Only the session's files change. Every other file stays as it is.
+- ShadowGit first saves a snapshot of the project as it is, named "Before going back to before" and the session's title, so you can return to that moment. Then it saves a snapshot of the result.
+- It refuses while your assistant is working in the project, and when a file or folder of yours stands where going back would put one of the session's files. A session that started with ShadowGit's first snapshot of the project doesn't offer it, since going back would delete every file.
+- If going back stops partway, ShadowGit says so and names the snapshot of the moment before.
+
+Going back needs ShadowGit 0.6.0 or later.
 
 ## Reviewed sessions
 
