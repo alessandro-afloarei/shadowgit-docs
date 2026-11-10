@@ -35,6 +35,8 @@ While your assistant's [session](/installation#sessions) is running, automatic s
 | Claude Code finished a session, with its words, files, lines and time, and **Review session** | A session ended and you haven't marked it reviewed |
 | Up to date, and the time of the last snapshot | Nothing waits for you |
 
+On a project with snapshots and no session yet, **Up to date** adds how one gets there: "When your assistant works in webshop, its session shows up here." Until ShadowGit has heard from an assistant, **Connect your assistant** follows; after, "Ask it to start a ShadowGit session." If you used ShadowGit before 0.6.0 without connecting an assistant, a card above reads "Review what your assistant changes", with **Connect your assistant**, **See an example** and **Dismiss**.
+
 The card names your assistant as ShadowGit hears it, or says "your assistant" when it doesn't know the name. **Review session** opens the session in [Review](/review). Once you mark it reviewed, the card moves on to the next session that waits, or says you're up to date.
 
 ## What happened
@@ -80,7 +82,9 @@ coverage/**
 *.sqlite
 ```
 
-`*` matches within one folder, `**` across folders and `?` one character. New snapshots follow the file. The ones already taken keep what they hold.
+A line reads as in a `.gitignore`, except that a pattern matches at any depth unless it starts with `/`. `*` matches within one name, `**` across folders, `?` one character and `[ab]` one of those characters. A plain name such as `node_modules` leaves out a file or a folder of that name, and a line starting with `!` brings back a file an earlier line left out. New snapshots follow the file. The ones already taken keep what they hold.
+
+From ShadowGit 0.6.0, git reads these rules itself, so it never opens a file they leave out: a file another program holds open in a left-out folder no longer stops snapshots. When ShadowGit can't read a file outside them, it names the file and asks you to add it here.
 
 ## Remove a project
 
