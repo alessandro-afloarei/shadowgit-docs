@@ -8,13 +8,13 @@ Your assistant reads ShadowGit's [map](/map) through the [MCP server](/installat
 
 1. **As a session starts**: the outline of your whole project.
 2. **After it reads a file**: where the file sits, and what other areas use from it.
-3. **After it edits a file**: what changed, and the code that depends on it, with the line where each one uses it.
+3. **After it edits a file**: what changed, and the code that depends on it.
 
 The first needs nothing from you. The other two come through hooks in your assistant's settings, which you turn on in ShadowGit. Everything is drawn on your computer from the map you see in ShadowGit, and is said once: when there is nothing to say, your assistant gets nothing extra.
 
 ## As a session starts
 
-The outline is in the MCP server's instructions. Claude Code reads them as a session starts, before your first question; Codex gives them to its model as the description of ShadowGit's tools. It holds your project's areas, the links between them that carry the most calls and imports, its processes and your [rules](/your-rules), in about 1,500 characters:
+The outline is in the MCP server's instructions. Claude Code reads them as a session starts, before your first question; Codex gives them to its model as the description of ShadowGit's tools. It holds your project's areas, the links between them that carry the most calls and imports, its processes and your [rules](/your-rules), in up to about 2,200 characters:
 
 ```text Outline
 This project, "webshop", on ShadowGit's map (snapshot f52ee006, 2026-11-12T10:53:24+01:00): 20 files, 4 areas, 4 layers.
@@ -25,7 +25,7 @@ Rules, quoted from .shadowgit-rules: "src/jobs never depends on src/api" because
 get_map and get_docs read more.
 ```
 
-In Claude Code, the tool that looks code up, `get_code_context`, is also ready from the first prompt instead of waiting to be found, and each dependent in its answer comes with the line where it uses the code. Your assistant sees how callers use a function without opening each file.
+When your assistant looks code up with `get_code_context`, each dependent in the answer comes with the line where it uses the code, so it sees how callers use a function without opening each file. In Claude Code, that tool is also ready from the first prompt instead of waiting to be found.
 
 ## As it reads and edits
 
@@ -42,7 +42,7 @@ ShadowGit's map (snapshot c22ec972, 2026-11-12T10:53:22+01:00): src/billing/char
 Used from other areas: chargeCard (line 5) by "api" (1) and "jobs" (1).
 ```
 
-**After an edit** (Claude Code and Codex), your assistant gets what changed in the file since the conversation began, symbol by symbol, and each dependent with the line where it uses that symbol:
+**After an edit** (Claude Code and Codex), your assistant gets what changed in the file since the conversation began, for each symbol something depends on. Where the change can break callers (a signature changed, a symbol removed or no longer exported), it lists each dependent with the line where it uses the symbol; for other changes, how many depend on it and from where:
 
 ```text After an edit
 ShadowGit's map: src/billing/charge.ts compared with snapshot c22ec972, the newest when this conversation began.
@@ -61,7 +61,7 @@ If the edit adds a link one of your rules names, the rule is quoted there too, a
 | Claude Code | `~/.claude/settings.json`, after each Read, Edit and Write | Claude Code 2.1.118 or later |
 | Codex | `~/.codex/hooks.json`, after each edit | Codex 0.149.0 or later |
 
-Both need version 2.11.0 or later of the MCP server, as ShadowGit last heard from that assistant. The switch adds one entry after the hooks you have, and turning it off takes out exactly that entry. Nothing else in the file changes, and a file that isn't plain JSON is never touched: the row says so, and names it.
+Both need version 2.11.0 or later of the MCP server, the highest ShadowGit has heard from that assistant. The switch adds one entry after the hooks you have, and turning it off takes out exactly that entry; the rest of the file keeps what it holds. A file that isn't plain JSON is never touched: the row says so, and names it. If you keep Codex's hooks in `config.toml`, Codex warns at start that hooks are in two places, and runs both.
 
 Both assistants read their hooks when a session starts, so a session already open gets them after a restart. Codex also asks you to review a new hook the next time it starts: choose **Trust all and continue**, or **Review hooks**.
 
@@ -78,17 +78,17 @@ We measured it before choosing the default: 690 runs of 23 change tasks in three
 | MCP server 2.11.0 | 98% | $0.09 |
 | 2.11.0 and the hooks | 97% | $0.09 |
 
-Codex passed 100% without ShadowGit and 99% with 2.11.0 and its hook. Every setup passed nearly every task, so the benchmark shows that 2.11.0 costs nothing more and breaks nothing more than 2.10.0, not that it helps: the difference was 0.0 points, within −2.6 and +2.6. The hooks made no measurable difference either, so they're yours to try, off by default.
+Codex passed 100% without ShadowGit and 99% with 2.11.0 and its hook. Every setup passed nearly every task, so the benchmark shows that 2.11.0 costs nothing more and breaks nothing more than 2.10.0, not that it helps: the difference was 0.0 points, within −2.6 and +2.6. The hooks didn't help either, 1.7 points lower if anything (within −4.3 and 0.0), so they're yours to try, off by default.
 
 ## Privacy
 
-The facts come from the map on your computer, and ShadowGit sends none of them anywhere. What your assistant reads goes to your AI provider, like any file it opens. ShadowGit's [usage data](/settings#privacy) counts how many facts were delivered and how long they took, never a path, a name or code.
+The facts come from the map on your computer, and ShadowGit sends none of them anywhere. What your assistant reads goes to your AI provider, like any file it opens. ShadowGit's [usage data](/settings#privacy) counts how many facts were delivered and how long they took, never a path, a symbol's name or code.
 
 ## Troubleshooting
 
 ### Claude Code shows a "hook error" notice
 
-The hooks run in every Claude Code session, and need the `shadowgit` MCP server connected in it. In a session where it isn't (it was removed, turned off in `/mcp`, or hadn't started yet), Claude Code shows a notice and goes on. Turn the switch off in ShadowGit to remove the hooks.
+The hooks run in every Claude Code session, and need the `shadowgit` MCP server connected in it. In a session where it isn't (it was removed, turned off in `/mcp`, or hadn't started yet), or when ShadowGit didn't answer in time, Claude Code shows a notice and goes on. Turn the switch off in ShadowGit to remove the hooks.
 
 ### The switch asks for a newer MCP server
 
