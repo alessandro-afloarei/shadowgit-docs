@@ -42,6 +42,7 @@
           {
             "group": "AI tools",
             "pages": [
+              "what-your-assistant-sees",
               "ai-tools/cursor",
               "ai-tools/claude-code"
             ]
